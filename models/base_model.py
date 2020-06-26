@@ -15,12 +15,21 @@ class BaseModel():
     BaseModel class Parent class to take care of the initialization,
     serialization and deserialization of instances
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initialization of a BaseModel instance"""
-
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+        if kwargs is not None:
+            for key in kwargs:
+                print (key)
+                if key != "__class__":
+                    if key == "created_at" or key == "updated_at":
+                        d = datetime.datetime.strptime(kwargs[key], "%Y-%m-%dT%H:%M:%S.%f")
+                        setattr(self, key, d)
+                    else:
+                        setattr(self, key, kwargs[key])
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
 
     def __str__(self):
         """String representation of a BaseModel instance"""
