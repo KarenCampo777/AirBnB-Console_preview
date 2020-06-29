@@ -8,7 +8,7 @@ serialization and deserialization of instances
 
 import uuid
 import datetime
-
+import models
 
 class BaseModel():
     """
@@ -17,9 +17,8 @@ class BaseModel():
     """
     def __init__(self, *args, **kwargs):
         """Initialization of a BaseModel instance"""
-        if kwargs is not None:
+        if len(kwargs) != 0:
             for key in kwargs:
-                print (key)
                 if key != "__class__":
                     if key == "created_at" or key == "updated_at":
                         d = datetime.datetime.strptime(kwargs[key], "%Y-%m-%dT%H:%M:%S.%f")
@@ -31,6 +30,8 @@ class BaseModel():
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
 
+        models.storage.new(self)
+
     def __str__(self):
         """String representation of a BaseModel instance"""
         msg = "[{}] ({}) {}"
@@ -39,6 +40,7 @@ class BaseModel():
     def save(self):
         """Updating BaseModel instance"""
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """dictionary representation of a BaseModel instance"""
