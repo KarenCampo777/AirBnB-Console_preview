@@ -10,6 +10,7 @@ import uuid
 import datetime
 import models
 
+
 class BaseModel():
     """
     BaseModel class Parent class to take care of the initialization,
@@ -21,7 +22,8 @@ class BaseModel():
             for key in kwargs:
                 if key != "__class__":
                     if key == "created_at" or key == "updated_at":
-                        d = datetime.datetime.strptime(kwargs[key], "%Y-%m-%dT%H:%M:%S.%f")
+                        formato = "%Y-%m-%dT%H:%M:%S.%f"
+                        d = datetime.datetime.strptime(kwargs[key], formato)
                         setattr(self, key, d)
                     else:
                         setattr(self, key, kwargs[key])

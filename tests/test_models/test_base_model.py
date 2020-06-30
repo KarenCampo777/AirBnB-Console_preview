@@ -4,6 +4,7 @@
 
 import unittest
 
+
 class TestInitBaseModel(unittest.TestCase):
     """ Testing the initialization of a BaseModel instance """
 
