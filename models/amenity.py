@@ -9,3 +9,7 @@ class Amenity(BaseModel):
     Representation of Amenity in the platform
     """
     name = ""
+
+    def __init__(self, *args **kwargs):
+        """Initializes Amenity"""
+        super().__init__(self, *args **kwargs)

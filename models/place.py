@@ -20,3 +20,7 @@ class Place(BaseModel):
     amenity_ids = []
     name = ""
 
+    def __init__(self, *args **kwargs):
+        """Initializes Place"""
+        super().__init__(self, *args **kwargs)
+
